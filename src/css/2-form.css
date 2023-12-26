@@ -1,0 +1,84 @@
+body {
+    width: 100%;
+    margin: 0;
+    padding: 24px;
+    background-color: #FFFFFF;
+    font-family: "Montserrat", sans-serif;
+    color: #2E2F42;
+}
+
+.feedback-form {
+    padding: 24px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+}
+
+.feedback-form>label {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #2E2F42;
+}
+
+.feedback-form>label>input,
+textarea {
+    border: 1px solid;
+    border-radius: 4px;
+    border-color: #808080;
+    padding-top: 8px;
+    padding-left: 16px;
+    width: 360px;
+    height: 40px;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+}
+
+.feedback-form>label>input:hover,
+textarea:hover {
+    border-color: #000000;
+}
+
+.feedback-form>label>input:active,
+textarea:active {
+    border-color: #808080;
+}
+
+.feedback-form>button {
+    display: block;
+    width: 95px;
+    height: 40px;
+    padding: 8px 16px;
+    border: 1px solid;
+    border-radius: 8px;
+    gap: 10px;
+    background-color: #4E75FF;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feedback-form>button:hover {
+    background-color: #6C8CFF;
+}
+
+*:focus {
+    outline: none;
+}
+
+.feedback-form>label>textarea {
+    height: 80px;
+    resize: none;
+}
