@@ -73,7 +73,6 @@ const container = images.reduce((html, {preview, original, description}) => html
       <img
         class="gallery-image"
         src="${preview}"
-        data-source='${original}'
         alt="${description}"
       />
     </a>
@@ -83,7 +82,7 @@ const gallery = document.querySelector('.gallery');
 
 gallery.insertAdjacentHTML('beforeend', container);
 
-let newGallery = new SimpleLightbox('.gallery a', {
+let lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
   captionsData: `alt`,
 });

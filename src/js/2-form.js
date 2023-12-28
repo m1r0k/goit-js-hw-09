@@ -1,53 +1,34 @@
-const STORAGE_KEY = "feedback-form-state";
-const form = document.querySelector('.feedback-form');
-const textarea = form.querySelector('textarea');
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('.feedback-form');
 
-const myLocalStorage = {
-    get: (key, json = false) => {
-        const data = localStorage.getItem(key);
+    function saveToLocalStorage() {
+        const formData = {
+            email: form.email.value.trim(),
+            message: form.message.value.trim()
+        };
+        localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+    }
 
-        if (!json) return data;
+    form.addEventListener('input', saveToLocalStorage);
 
-        try {
-            return JSON.parse(data);
-        } catch (e) {
-            console.error(e);
+    const savedData = localStorage.getItem('feedback-form-state');
+    if (savedData) {
+        const parsedData = JSON.parse(savedData);
+        form.email.value = parsedData.email;
+        form.message.value = parsedData.message;
+    }
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const emailValue = form.email.value.trim();
+        const messageValue = form.message.value.trim();
+
+        if (emailValue && messageValue) {
+            console.log({ email: emailValue, message: messageValue });
+            localStorage.removeItem('feedback-form-state');
+            form.reset();
+        } else {
+            alert('Please fill in all fields');
         }
-    },
-    set: (key, data, json = false) => {
-        localStorage.setItem(key, json ? JSON.stringify(data) : data);
-    },
-    remove: (key) => {
-        localStorage.removeItem(key)
-    }
-}
-
-const initialFormData = myLocalStorage.get(STORAGE_KEY, true);
-
-Array.from(form.elements).forEach(element => {
-    const storageValue = initialFormData[element.name];
-    if (storageValue) {
-        element.value = storageValue.trim();
-    }
-})
-
-
-form.addEventListener("input", () => {
-    const formData = new FormData(form);
-
-    const formObject = {};
-
-    formData.forEach((value, key) => {
-        formObject[key] = value.trim();
-    })
-
-    myLocalStorage.set(STORAGE_KEY, formObject, true)
-});
-
-
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    myLocalStorage.remove(STORAGE_KEY);
-
-    form.reset();
+    });
 });
